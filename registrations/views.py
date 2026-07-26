@@ -3,6 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from accounts.permissions import IsOwnerOrAdmin
 from .models import Registration
 from .permissions import IsStudentOrAdmin
 from .serializers import RegistrationCreateSerializer, RegistrationSerializer

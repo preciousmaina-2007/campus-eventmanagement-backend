@@ -1,17 +1,13 @@
-from rest_framework import permissions
+from accounts.permissions import IsOwnerOrAdmin
 
 
-class IsStudentOrAdmin(permissions.BasePermission):
+class IsStudentOrAdmin(IsOwnerOrAdmin):
     """
-    Custom permission:
+    Custom permission (extends IsOwnerOrAdmin):
     - Students can create (register) and view their own registrations.
     - Admins can view all registrations and manage them.
     - Organizers cannot register, but can view registrations for their events (list only).
     """
-
-    def has_permission(self, request, view):
-        # Must be authenticated
-        return request.user and request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
         # Admin has full access
