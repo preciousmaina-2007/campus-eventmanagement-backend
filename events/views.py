@@ -5,8 +5,8 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from accounts.permissions import IsOrganizerOrReadOnly
 from .models import Event
-from .permissions import IsOrganizerOrAdmin
 from .serializers import EventCreateUpdateSerializer, EventSerializer
 
 
@@ -24,7 +24,7 @@ class EventFilter(FilterSet):
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
-    permission_classes = [IsAuthenticated, IsOrganizerOrAdmin]
+    permission_classes = [IsAuthenticated, IsOrganizerOrReadOnly]
     filter_backends = [
         DjangoFilterBackend,
         filters.SearchFilter,
